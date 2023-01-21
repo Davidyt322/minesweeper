@@ -1,9 +1,11 @@
 package Interfaces.GUI;
 
+import Logic.enumerates.Placeable;
 import Logic.modelGame.Cell;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class TextBoardPanel extends JPanel {
 
@@ -25,14 +27,23 @@ public class TextBoardPanel extends JPanel {
             JLabel verticalIndex = new JLabel(String.valueOf(i));
             boardPanel.add(verticalIndex);
             for (int j = 0; j < dimension - 1; j++) {
-                JLabel square = new JLabel(" si " + i);
+                JLabel square = new JLabel(getStatusCell(i,j).getName());
                 boardPanel.add(square);
             }
         }
         add(boardPanel);
     }
 
-    public static void main(String[] args) {
-        new TextBoardPanel(10);
+    private void actualiceBoard(){
+
+    }
+
+    private Placeable getStatusCell(int row, int colum){
+        return main.getACell(row,colum).getPlaceable();
+    }
+
+    @Override
+    public void setVisible(boolean aFlag){
+        super.setVisible(aFlag);
     }
 }

@@ -195,13 +195,13 @@ public class mainMenu extends javax.swing.JFrame {
         synchronized (main.lock) {
             main.mainLock();
         }
-    }//GEN-LAST:event_easyActionPerformed
+    }
 
     private void customActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customActionPerformed
         CustomDifficult screen = new CustomDifficult();
         screen.setLocationRelativeTo(custom);
         screen.setVisible(true);
-    }//GEN-LAST:event_customActionPerformed
+    }
 
     private void mediumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediumActionPerformed
         int dimension = 18;
@@ -211,7 +211,7 @@ public class mainMenu extends javax.swing.JFrame {
         synchronized (main.lock) {
             main.mainLock();
         }
-    }//GEN-LAST:event_mediumActionPerformed
+    }
 
     private void hardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hardActionPerformed
         int dimension = 24;
@@ -221,10 +221,8 @@ public class mainMenu extends javax.swing.JFrame {
         synchronized (main.lock) {
             main.mainLock();
         }
-    }//GEN-LAST:event_hardActionPerformed
+    }
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JButton custom;
     private javax.swing.JButton easy;
@@ -234,5 +232,4 @@ public class mainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton medium;
-    // End of variables declaration//GEN-END:variables
 }
