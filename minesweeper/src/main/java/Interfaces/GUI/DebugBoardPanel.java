@@ -8,11 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class TextBoardPanel extends JPanel {
+public class DebugBoardPanel extends JPanel {
 
     List<List<JLabel>> board = new LinkedList<>();
 
-    public TextBoardPanel(int dimension) {
+    public DebugBoardPanel(int dimension) {
         dimension++;
         setBoardText(dimension);
         setBounds(0,0,1000,1000);
@@ -41,6 +41,9 @@ public class TextBoardPanel extends JPanel {
     }
 
     private Placeable getStatusCell(int row, int colum){
+        if(main.getACell(row,colum).getBomb() != null){
+            return Placeable.Mine;
+        }
         return main.getACell(row,colum).getPlaceable();
     }
 
@@ -62,7 +65,7 @@ public class TextBoardPanel extends JPanel {
     public static void main(String[] args){
         main.selectDificulty(10,0.1f);
         JFrame frame = new JFrame();
-        TextBoardPanel panel = new TextBoardPanel(10);
+        DebugBoardPanel panel = new DebugBoardPanel(10);
         frame.add(panel);
         panel.setVisible(true);
         frame.setVisible(true);

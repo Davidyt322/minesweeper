@@ -20,7 +20,7 @@ public class main {
     
     static boolean generatedMines = false;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
 
         lock = new Object();
 
@@ -52,7 +52,6 @@ public class main {
         game.makePlay(row, colum, Placeable.Played.getName());
         generateMines();
         game.getBoard().expandPlay();
-        boolean si = true;
     }
     
     static void makeAFlag(int row, int colum){
@@ -68,13 +67,14 @@ public class main {
     }
     
     static void generateMines(){
-        if(generatedMines==false){
+        if(!generatedMines){
             game.generateMines();
             game.lookNearMines();
         }
         generatedMines = true;
     }
-    
+
+    @Deprecated
     static int nearMines(int row, int colum){
         return game.getBoard().getACell(row, colum).getNearMines();
     }
@@ -86,7 +86,8 @@ public class main {
     static Cell getACell(int row, int colum){
         return game.getBoard().getACell(row, colum);
     }
-    
+
+    @Deprecated
     static boolean cellInBoard(int row, int colum){
         return game.getBoard().cellInBoard(row, colum);
     }
