@@ -57,14 +57,4 @@ public class TextBoardPanel extends JPanel {
             }
         }
     }
-
-    //main to test the panel
-    public static void main(String[] args){
-        main.selectDificulty(10,0.1f);
-        JFrame frame = new JFrame();
-        TextBoardPanel panel = new TextBoardPanel(10);
-        frame.add(panel);
-        panel.setVisible(true);
-        frame.setVisible(true);
-    }
 }
