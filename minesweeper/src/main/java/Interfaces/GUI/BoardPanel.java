@@ -92,6 +92,7 @@ public class BoardPanel extends javax.swing.JPanel {
                                 }
                             }
                         }
+                        //
                         if (!done) {
                             button.setText(" ");
                         }
