@@ -67,7 +67,6 @@ public class BoardPanel extends javax.swing.JPanel {
     }
 
     private void actualiceButtons() {
-        int counter = 0;
         for (int i = 0; i < main.getboardDimension(); i++) {
             for (int j = 0; j < main.getboardDimension(); j++) {
                 JButton button = board.get(i).get(j);
@@ -92,7 +91,6 @@ public class BoardPanel extends javax.swing.JPanel {
                                 }
                             }
                         }
-                        //
                         if (!done) {
                             button.setText(" ");
                         }
@@ -107,6 +105,7 @@ public class BoardPanel extends javax.swing.JPanel {
         }
     }
 
+    @Deprecated
     private Cell getACell(int row, int colum) {
         return main.getACell(row, colum);
     }
