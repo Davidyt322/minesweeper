@@ -14,25 +14,26 @@ import Logic.enumerates.Placeable;
 import Logic.modelGame.Cell;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * @author David Peñasco
  */
-public class BoardFrame extends javax.swing.JPanel {
+public class BoardPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form Board
      */
-    static List<CellButton> board = new LinkedList<>();
+    static List<List<CellButton>> board = new LinkedList<>();
 
-    public BoardFrame(int dimension) {
+    public BoardPanel(int dimension) {
         JPanel boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(dimension, dimension));
         createBoard(boardPanel, dimension);
         add(boardPanel);
-        setBounds(0,0,1000,1000);
+        setBounds(0, 0, 1000, 1000);
         setVisible(true);
         setPreferredSize(new Dimension(1000, 1000));
         boardPanel.setPreferredSize(new Dimension(1000, 1000));
@@ -40,9 +41,10 @@ public class BoardFrame extends javax.swing.JPanel {
 
     public void createBoard(JPanel boardPanel, int dimension) {
         for (int i = 0; i < dimension; i++) {
+            board.add(new ArrayList<>());
             for (int j = 0; j < dimension; j++) {
                 CellButton button = new CellButton(i, j);
-                board.add(button);
+                board.get(i).add(button);
                 if (dimension <= 20) {
                     button.setPreferredSize(new Dimension(50, 50));
                 } else {
@@ -68,42 +70,37 @@ public class BoardFrame extends javax.swing.JPanel {
         int counter = 0;
         for (int i = 0; i < main.getboardDimension(); i++) {
             for (int j = 0; j < main.getboardDimension(); j++) {
-                JButton button = board.get(counter);
+                JButton button = board.get(i).get(j);
+                Cell cell = main.getACell(i, j);
                 Placeable status = main.getGame().getBoard().getACell(i, j).getPlaceable();
                 switch (status) {
-                    case Blank:
-                        boolean writed = false;
-                        if (getACell(i, j).getNearMines() > 0) {
-                            for (int k = -1; k < 2; k++) {
-                                for (int l = -1; j < 2; j++) {
-                                    if (!writed && cellInBoard(i + k, j + l) &&
-                                            main.getACell(i + k, j + l).getPlaceable() == Placeable.Played) {
-                                        button.setText(String.valueOf(main.getACell(i, j).getNearMines()));
-                                        writed = true;
-                                    } else if (!writed) {
-                                        button.setText(" ");
-                                        writed = true;
-                                    }
+                    case Blank -> {
+                        boolean done = false;
+                        button.setBackground(Color.GRAY);
+                        if(cell.getBomb() != null){
+                            button.setText(" ");
+                            done = true;
+                        }
+                        for (int k = -1; k < 2; k++) {
+                            for (int l = -1; l < 2; l++) {
+                                if (cell.getNearMines() > 0 && cellInBoard(i + k, j + l) &&
+                                        main.getACell(i + k, j + l).getPlaceable() == Placeable.Played
+                                        && !done) {
+                                    button.setText(String.valueOf(cell.getNearMines()));
+                                    button.setBackground(Color.white);
+                                    done = true;
                                 }
                             }
                         }
-                        counter++;
-                        break;
-                    case Played:
-                        if (main.getACell(i, j).getBomb() == Placeable.Mine && main.getACell(i, j).getPlaceable() == Placeable.Played) {
-                            button.setText(Placeable.Explode.getIcon());
-                            button.setBackground(Color.LIGHT_GRAY);
-                            counter++;
-                        } else {
+                        if (!done) {
                             button.setText(" ");
-                            button.setBackground(Color.LIGHT_GRAY);
-                            counter++;
                         }
-                        break;
-                    case Flag:
+                    }
+                    case Played -> button.setBackground(Color.white);
+                    case Flag -> {
+                        button.setBackground(Color.GRAY);
                         button.setText(Placeable.Flag.getIcon());
-                        counter++;
-                        break;
+                    }
                 }
             }
         }
@@ -113,7 +110,7 @@ public class BoardFrame extends javax.swing.JPanel {
         return main.getACell(row, colum);
     }
 
-    private boolean cellInBoard(int row, int colum){
-        return main.getGame().getBoard().cellInBoard(row,colum);
+    private boolean cellInBoard(int row, int colum) {
+        return main.getGame().getBoard().cellInBoard(row, colum);
     }
 }

@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 
 public class GameFrame extends javax.swing.JFrame{
 
-    BoardFrame boardPanel;
+    BoardPanel boardPanel;
 
     TextBoardPanel boardTextPanel;
 
@@ -25,7 +25,7 @@ public class GameFrame extends javax.swing.JFrame{
         JPanel buttons = new JPanel();
 
         //set the board
-        boardPanel = new BoardFrame(main.getboardDimension());
+        boardPanel = new BoardPanel(main.getboardDimension());
         boardPanel.setVisible(true);
 
         //set a text board panel

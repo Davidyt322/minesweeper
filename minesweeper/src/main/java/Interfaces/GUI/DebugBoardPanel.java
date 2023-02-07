@@ -56,7 +56,7 @@ public class DebugBoardPanel extends JPanel {
     private void actualiceBoard(){
         for(int i =0; i<main.getboardDimension();i++){
             for(int j=0;j<main.getboardDimension();j++){
-                board.get(i).get(j).setText(getStatusCell(i,j).getName());
+                board.get(i).get(j).setText(getStatusCell(i,j).getIcon());
             }
         }
     }
